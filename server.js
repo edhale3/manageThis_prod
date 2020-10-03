@@ -92,10 +92,12 @@ passport.deserializeUser(function(user, done) {
 
 //landing get route
 app.get('/', (req,res)=> {
+  console.log("hasta manana brudda")
   res.send(req.isAuthenticated())
 })
 
 app.get('/signin', (req, res) => {
+  console.log("You got here: ", req)
   if(req.isAuthenticated()){
     return res.send(true)
   } else {

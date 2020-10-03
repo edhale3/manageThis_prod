@@ -26,7 +26,7 @@ class SignIn extends Component {
     }
 
     logout = () => {
-        axios.get("logout")
+        axios.get("/logout")
         .then(res => {
             this.setState({isLoggedIn: false})
         })
@@ -47,6 +47,7 @@ class SignIn extends Component {
         return (
             <div className="authenticatedLogic">
                 {newData}
+                <p>This is here</p>
                 <AboutContact/>
             </div>
         )
