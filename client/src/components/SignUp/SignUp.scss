@@ -1,0 +1,55 @@
+// .authenticatedLogic {
+//     line-height: 100%;
+//     display: flex;
+//     justify-content: space-around;
+// }
+
+.Signup-Page{
+    // background-color: rgba(255, 0, 0, 0.219);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.Signup-Data {
+    // background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Signup-Form {
+    background-color: rgb(177, 112, 112);
+    display: block;
+    // justify-content: center;
+    // align-items: center;
+    margin-top: 10%;
+    padding: 3%;
+    border-radius: .3em;
+}
+
+// .Signup-Submit {
+//     // margin: 0;
+//     margin-left: 103px;
+//     margin-right: 103px;
+// }
+
+input {
+    border: 0;
+    height: 30px;
+    width:500px
+}
+
+input:focus {
+    outline: none;
+}
+
+.Gender {
+    position: relative;
+
+}
+
+.Gender-Selector {
+    width: 100%;
+}

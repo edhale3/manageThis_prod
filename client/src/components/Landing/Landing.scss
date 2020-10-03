@@ -1,0 +1,109 @@
+html, body {
+    overflow: scroll;
+    // line-height: 100vh;
+    height: 100%;
+    background-image: url("./landingpage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    border-radius: 0%;
+}
+
+
+
+// .Landing {
+
+// }
+
+// .NewData {
+//     background-image: url("./landingpage.jpg");
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     border-radius: 0%;
+// }
+
+h1 {
+    color: white;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    font-size: 5em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+.Buttons {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.Signup {
+    background-color:#117a8b;
+    display: block;
+    width: 150px;
+    height: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 40px;
+    padding:0;
+    border:0;
+    box-shadow: 2px 0px 9px 6px #117a8b;
+    border-radius: .5em;
+}
+
+.Signin {
+    display: block;
+    background-color: #117a8b;
+    width: 150px;
+    height: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 10px;
+    padding:0;
+    border:0;
+    box-shadow: 2px 0px 7px 6px #117a8b;
+    border-radius: .5em;
+}
+
+button:focus {
+    outline:none;
+}
+
+button:active {
+    background-color: white;
+}
+
+.Extra-Buttons {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+}
+
+.About {
+    margin-right: 30px;
+    background:white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: .5em;
+}
+
+.Contact {
+    // margin-right: 30px;
+    background:white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 90px;
+    border-radius: .5em;
+}
+
+a:hover {
+    text-decoration: none;
+}
+

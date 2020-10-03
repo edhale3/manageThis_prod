@@ -1,0 +1,62 @@
+.authenticatedLogic {
+    line-height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Signin-Page{
+    // background-color: rgba(255, 0, 0, 0.219);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.Signin-Data {
+    // background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Signin-Form {
+    background-color: rgb(177, 112, 112);
+    display: block;
+    // justify-content: center;
+    // align-items: center;
+    margin-top: 10%;
+    padding: 3%;
+    border-radius: .3em;
+}
+
+.Signin-Submit {
+    // margin: 0;
+    margin-left: 103px;
+    margin-right: 103px;
+}
+
+
+label {
+    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+    // margin-left:10px;
+}
+
+input {
+    border: 0;
+    height: 30px;
+    width: 300px
+}
+
+input:focus {
+    outline: none;
+}
+
+.Congrats-Message {
+    background-color: rgb(177, 112, 112);
+    line-height: 30px;
+    padding: 2%;
+    margin: 5%;
+}
+

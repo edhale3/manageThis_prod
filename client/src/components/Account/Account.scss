@@ -1,0 +1,44 @@
+// html,body {
+//     background-color: rgb(44, 220, 226);
+// }
+
+.Account-Container {
+    // // background-color: rgba(88, 88, 199, 0.384);
+    // position: absolute;
+    // background-color: rgba(0, 0, 0, 0.534);
+    // line-height: 50px;
+    // width: 100%;
+    background-color: rgb(146, 173, 204);
+    height: 100vh;
+    line-height: 100%;
+    overflow: hidden;
+}
+
+.Account-Header {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.534);
+    line-height: 50px;
+    width: 100%;
+}
+
+.Welcome-Header {
+    color: white;
+    // background-color: rgba(222, 184, 135, 0.514);
+    // display: inline-block;
+    float: right;
+    margin-right: 70px;
+}
+
+.Logout-Header {
+    margin-right: 20px;
+}
+
+.New-Project {
+    color: white;
+    position: absolute;
+    top:50px;
+}
+
+.New-Project:active {
+    color:#7fd1bf
+}

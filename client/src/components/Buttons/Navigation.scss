@@ -1,0 +1,14 @@
+.Nav-Buttons {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+button {
+    margin: 10px;
+    border:0;
+    background-color: rgb(127, 209, 191);
+    border-radius: .3em;
+    width: 100px;
+    height: 40px;
+}
