@@ -147,6 +147,7 @@ app.get("/signup", function(req,res){
 
 //signup route for posting 
 app.post('/signup', async (req, res ) => {
+  console.log("This is the request I got", req)
   try {
     //pull a client from the pool
     const client = await pool.connect()
