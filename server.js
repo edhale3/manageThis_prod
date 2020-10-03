@@ -26,7 +26,7 @@ app.use(cookieParser())
 
 app.use(flash())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: "secret goes here",
   resave: false,
   saveUninitialized: false
 }))
