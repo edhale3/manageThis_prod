@@ -32,7 +32,7 @@ class SignUp extends Component {
             console.log(res.data.errors)
             if(res.data){
                 console.log(res.data)
-                window.location = "https://manage-this-new.com/signin"
+                window.location = "https://manage-this-new.herokuapp.com/signin"
             } else {
                 window.location.replace("/signup")
             }
