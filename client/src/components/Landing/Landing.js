@@ -21,6 +21,8 @@ class Landing extends Component {
 
 
     render () {
+
+        console.log("Got here muddafucka")
         if(this.state.redirect){
             return <Redirect to={`/${this.state.redirect}`} />
         }
