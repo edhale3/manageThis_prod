@@ -22,7 +22,7 @@ class Landing extends Component {
 
     render () {
 
-        console.log("Got here muddafucka")
+        console.log("Got here muddafucka ", this.state)
         if(this.state.redirect){
             return <Redirect to={`/${this.state.redirect}`} />
         }
