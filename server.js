@@ -91,7 +91,7 @@ passport.deserializeUser(function(user, done) {
 // app.use('/', indexRouter)
 
 //landing get route
-app.get('/', (req,res)=> {
+app.get('/*', (req,res)=> {
   console.log("hasta manana brudda")
   res.send(req.isAuthenticated())
 })
