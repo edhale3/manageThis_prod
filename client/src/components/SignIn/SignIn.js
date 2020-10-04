@@ -13,6 +13,7 @@ class SignIn extends Component {
     componentDidMount = async () => {
         let response = await axios.get("/signin")
             .then(res => {
+                console.log(res)
                 return res.data
             })
             .catch(err => {
