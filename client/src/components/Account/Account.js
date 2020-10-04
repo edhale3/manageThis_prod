@@ -10,19 +10,19 @@ class Account extends Component {
         this.state = {}
     }
 
-    // componentDidMount = () => {
-    //     Axios.get("/account")
-    //     .then(res => {
-    //         console.log("account res ", res)
-    //         if(res.data == false ){
-    //             window.location.replace("/signin")
-    //         }
-    //         this.setState({ data: res.data})
-    //     })
-    //     .catch(err => {
-    //         throw err
-    //     })
-    // }
+    componentDidMount = () => {
+        Axios.get("/account")
+        .then(res => {
+            console.log("account res ", res)
+            if(res.data == false ){
+                window.location.replace("/signin")
+            }
+            this.setState({ data: res.data})
+        })
+        .catch(err => {
+            throw err
+        })
+    }
 
     logoutButton = () => {
         Axios.get("logout")
@@ -34,29 +34,29 @@ class Account extends Component {
         })
     }
 
-    // getData = () => {
-    //     return Object.keys(this.state.data).map(item => {
-    //                 return (<div key={Math.floor(Math.random()*200)}>{this.state.data[item]}</div>)
-    //             })
-    // }
+    getData = () => {
+        return Object.keys(this.state.data).map(item => {
+                    return (<div key={Math.floor(Math.random()*200)}>{this.state.data[item]}</div>)
+                })
+    }
 
-    // getAllProjects = async () => {
-    //     let response = await Axios.get("/projects")
-    //     .then(res => {
-    //         return res.data
-    //     })
-    //     .catch( err => {
-    //         throw err
-    //     })
+    getAllProjects = async () => {
+        let response = await Axios.get("/projects")
+        .then(res => {
+            return res.data
+        })
+        .catch( err => {
+            throw err
+        })
 
-    //     console.log("this is the response:", response.rows)
-    //     return response.rows.map(row => {
-    //         console.log("this is a row:", row.title)
-    //         return (
-    //             <a>{row.title}</a>
-    //         )
-    //     })
-    // }
+        console.log("this is the response:", response.rows)
+        return response.rows.map(row => {
+            console.log("this is a row:", row.title)
+            return (
+                <a>{row.title}</a>
+            )
+        })
+    }
 
     render(){
         return (
