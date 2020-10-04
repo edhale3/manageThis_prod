@@ -18,6 +18,7 @@ class SignIn extends Component {
             .catch(err => {
                 throw err
             })
+            console.log(response)
         if(response){   
             this.setState({
                 isLoggedIn: true
