@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 // import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-// import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import About from '../About/About'
 import Contact from '../Contact/Contact'
 import Landing from '../Landing/Landing'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
-import Navigation from '../Navigation/Navigation'
+// import Navigation from '../Navigation/Navigation'
 import Account from '../Account/Account'
 import NewProject from '../NewProject/NewProject'
 
