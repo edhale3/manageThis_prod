@@ -36,5 +36,5 @@
     "node-sass": "^4.14.1",
     "react-router-dom": "^5.2.0"
   },
-  "proxy":"https://localhost:5000"
+  "proxy": "https://localhost:5000"
 }
