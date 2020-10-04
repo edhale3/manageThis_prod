@@ -34,6 +34,16 @@ app.use(passport.initialize());
 app.use(passport.session())
 const isLoggedIn = require('./isLoggedIn');
 
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  console.log(__dirname)
+  app.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
 
 const { Pool, Client } = require('pg');
 //create pool of clients with connection string to connect to the 'manage' database
@@ -222,15 +232,6 @@ app.get("/projects", isLoggedIn, async (req, res) => {
   }
 })
 
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  console.log(__dirname)
-  app.use(express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
 
 
 app.listen(PORT, () => {
