@@ -14,12 +14,8 @@ const pool = new Pool({
 });
 
 let user = require('../controllers/user')
+let data = require('../controllers/data')
 
-//landing get route
-// router.get('/api', (req,res)=> {
-//     console.log("hasta manana brudda")
-//     res.send(req.isAuthenticated())
-// })
 
 router.get('/api', user.home)
 router.get("/api/signup", user.signup) 
@@ -28,45 +24,10 @@ router.get('/api/signin', user.signin)
 router.post('/api/signin', passport.authenticate('local'), user.postSignin)
 router.get('/api/logout', user.logout)
 router.get("/api/account", isLoggedIn, user.account)
-
-
-  
 router.get('/api/newproject', isLoggedIn, async (req,res)=> {
     console.log("You got here now")
-})
-  
-router.post('/api/newproject', isLoggedIn, async (req,res) => {
-    try {
-      const client = await pool.connect()
-      await client.query('BEGIN')
-      await JSON.stringify(await client.query(`insert into projects ("title", "project_status", "description", "account_id") 
-      values ($1,$2,$3,$4)`,
-      [req.body.title, req.body.project_status, req.body.description, req.user[0].id],
-      function(err, result){
-        if(err){
-          console.log(err)
-          client.query('ROLLBACK')
-        } else {
-          client.query('COMMIT')
-          console.log("Project created")
-          res.send("Congratulations you have made a new project!")
-          return
-        }
-      }))
-    } catch (e){
-      throw e
-    }
-})
-  
-router.get("/api/projects", isLoggedIn, async (req, res) => {
-    try {
-      const client = await pool.connect()
-      await client.query('BEGIN')
-      res.send( JSON.stringify(await client.query(`select * from projects`)) )
-    } catch (e){
-      throw e
-    }
-})
-
+})  
+router.post('/api/newproject', isLoggedIn, data.postProject )
+router.get("/api/projects", isLoggedIn, data.projects)
 
 module.exports = router;

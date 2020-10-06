@@ -9,19 +9,12 @@ const pool = new Pool({
 });
 
 exports.home = (req,res) => {
-    console.log("hasta manana brudda")
     res.send(req.isAuthenticated())
 }
 
-
 exports.signin = (req, res) => {
-    console.log("You got here: ", req)
-    if(req.isAuthenticated()){
-      return res.send(req.isAuthenticated())
-    } else {
-      return res.send(req.isAuthenticated())
-    }
-  }
+    res.send(req.isAuthenticated())
+}
 
 exports.postSignin = (req, res) => {
     if (req.body.remember) {
@@ -39,7 +32,6 @@ exports.account = async (req,res) => {
       await JSON.stringify(await client.query(`select first_name, last_name, gender, email from "accounts" where "account_id"=$1`,
       [req.user[0].id],
       function(err, result){
-        console.log(result)
         if(result.rows[0]){
           res.send(result.rows[0])
         } else {
@@ -52,7 +44,6 @@ exports.account = async (req,res) => {
 }
 
 exports.logout = (req, res) => {
-    console.log("logout time")
     req.logout()
     res.redirect("/")
 }
@@ -62,7 +53,6 @@ exports.signup = (req,res) => {
 }
 
 exports.postSignup = async (req, res ) => {
-    console.log("This is the request I got", req.body)
     try {
       //pull a client from the pool
       const client = await pool.connect()
