@@ -21,7 +21,7 @@ class SignInForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         let signInData = this.state
-        axios.post('/signin', signInData).then(res => {
+        axios.post('/api/signin', signInData).then(res => {
             if(res.status !== 200){
                 throw new Error()
             } else {
