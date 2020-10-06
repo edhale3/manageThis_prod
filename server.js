@@ -145,9 +145,9 @@ app.get('/logout', (req, res) => {
   res.redirect("/")
 })
 
-app.get("/signup", function(req,res){
-  console.log("this one: ", req.isAuthenticated())
-})
+// app.get("/signup", function(req,res){
+//   console.log("this one: ", req.isAuthenticated())
+// })
 
 //signup route for posting 
 app.post('/signup', async (req, res ) => {
