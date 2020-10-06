@@ -93,10 +93,10 @@ passport.deserializeUser(function(user, done) {
 // app.use('/', indexRouter)
 
 //landing get route
-app.get('/', (req,res)=> {
-  console.log("hasta manana brudda")
-  res.send(req.isAuthenticated())
-})
+// app.get('/', (req,res)=> {
+//   console.log("hasta manana brudda")
+//   res.send(req.isAuthenticated())
+// })
 
 app.get('/login', (req, res) => {
   console.log("You got here: ", req)
