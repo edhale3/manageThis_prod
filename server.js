@@ -101,9 +101,9 @@ app.get('/', (req,res)=> {
 app.get('/login', (req, res) => {
   console.log("You got here: ", req)
   if(req.isAuthenticated()){
-    return res.send("Heck yeah")
+    return res.send(req.isAuthenticated())
   } else {
-    return res.send("Heck no")
+    return res.send(req.isAuthenticated())
   }
 })
 
