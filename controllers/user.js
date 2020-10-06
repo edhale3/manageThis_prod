@@ -1,4 +1,12 @@
 const express = require('express')
+const passport = require('passport');
+const bcrypt = require('bcrypt')
+// const database = require('../services/db')
+const { Pool, Client } = require('pg');
+//create pool of clients with connection string to connect to the 'manage' database
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
 
 exports.home = (req,res) => {
     console.log("hasta manana brudda")
