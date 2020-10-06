@@ -1,50 +1,91 @@
-const SignUp = require('../SQLQueries/SignUpQuery')
-const { validateUser } = require('../validators/signup');
-const { validateSignIn } = require('../validators/signin')
-const { isEmpty } = require('lodash');
-const passport = require('passport')
-const database = require('../services/db')
+const express = require('express')
 
-const rerender_signup = (errors, req, res, next) => {
-    signup.SignUp.errors(errors)
+exports.home = (req,res) => {
+    console.log("hasta manana brudda")
+    res.send(req.isAuthenticated())
 }
 
-exports.submit_signin= function(req, res){
-    let errors = {}
-    return validateSignIn(errors,req).then( result  => {
-        console.log('result: ', result)
-        if(!isEmpty(errors)){
-            console.log("Sign In errors: ", errors)
-            return "You're still a failure"
-        } else {
-            console.log("you got here this time")
-            passport.authenticate('local', {
-                successRedirect:"/home",
-                failureRedirect:"/signin",
-                failureFlash: true
-            })(req,res);
-        }
-    })
+
+exports.signin = (req, res) => {
+    console.log("You got here: ", req)
+    if(req.isAuthenticated()){
+      return res.send(req.isAuthenticated())
+    } else {
+      return res.send(req.isAuthenticated())
+    }
+  }
+
+exports.postSignin = (req, res) => {
+    if (req.body.remember) {
+      req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000
+    } else {
+      req.session.cookie.expires = false;
+    }
+    res.send(req.user)
 }
 
-exports.get_account= async function(req,res){
-    console.log('this req:', req.params.email)
-    const query = await database.query(`select * from accounts where email = '${req.params.email}'`)
-    console.log("query:", query.rows[0])
-    return res.send(query.rows[0]) 
-} 
-
-exports.submit_signup= async (req, res) => {
-    let errors = {};
-    return validateUser(errors, req).then(errors => {
-        console.log("errors: ", errors)
-        if(!isEmpty(errors)){
-            console.log(errors)
-            return "you're a failure"
+exports.account = async (req,res) => {
+    try {
+      const client = await pool.connect()
+      await client.query('BEGIN')
+      await JSON.stringify(await client.query(`select first_name, last_name, gender, email from "accounts" where "account_id"=$1`,
+      [req.user[0].id],
+      function(err, result){
+        console.log(result)
+        if(result.rows[0]){
+          res.send(result.rows[0])
         } else {
-            const newUser = SignUp.signUpPost(req.body).then(result => res.send("Good Job"))
-            return newUser
+          res.send("Redirect")
         }
-    })
-    // return SignUp.signUpPost(req.body).then(result =>  res.send("Good Job"))
+      }))
+    } catch (e) {
+      throw(e)
+    }
+}
+
+exports.logout = (req, res) => {
+    console.log("logout time")
+    req.logout()
+    res.redirect("/")
+}
+
+exports.signup = (req,res) => {
+    console.log("this one: ", req.isAuthenticated())
+}
+
+exports.postSignup = async (req, res ) => {
+    console.log("This is the request I got", req.body)
+    try {
+      //pull a client from the pool
+      const client = await pool.connect()
+      await client.query('BEGIN')
+      let pwd = await bcrypt.hash(req.body.password, 8);
+      await JSON.stringify(await client.query(`select account_id from "accounts" where "email" = $1`,
+        [req.body.email], 
+        function(err, result) {
+          if(result.rows[0]){
+            console.log("This email is already registered")
+            res.send(err)
+          } else {
+            client
+            .query(`insert into accounts ("first_name", "last_name", email, gender, password) 
+                    values ($1,$2,$3,$4,$5)`,
+                    [req.body.first_name, req.body.last_name, req.body.email, req.body.gender, pwd], 
+                    function(err, result){
+                      if(err){
+                        console.log(err)
+                        client.query('ROLLBACK')
+                      } else {
+                        client.query('COMMIT')
+                        console.log("User created")
+                        res.send("Congratulations you have made an account!")
+                        return
+                      }
+            })
+          }
+        }))
+        client.release()
+    } catch (e) {
+      throw(e)
+    }
 }

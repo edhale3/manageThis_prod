@@ -11,7 +11,7 @@ class SignIn extends Component {
     }
 
     componentDidMount = async () => {
-        let response = await axios.get("/api/login")
+        let response = await axios.get("/api/signin")
             .then(res => {
                 console.log(res)
                 return res.data
