@@ -93,12 +93,12 @@ passport.deserializeUser(function(user, done) {
 // app.use('/', indexRouter)
 
 //landing get route
-// app.get('/', (req,res)=> {
-//   console.log("hasta manana brudda")
-//   res.send(req.isAuthenticated())
-// })
+app.get('/api', (req,res)=> {
+  console.log("hasta manana brudda")
+  res.send(req.isAuthenticated())
+})
 
-app.get('/login', (req, res) => {
+app.get('/api/login', (req, res) => {
   console.log("You got here: ", req)
   if(req.isAuthenticated()){
     return res.send(req.isAuthenticated())
@@ -108,7 +108,7 @@ app.get('/login', (req, res) => {
 })
 
 //post route for signing in 
-app.post('/signin', 
+app.post('/api/signin', 
   passport.authenticate('local'),
   function(req, res) {
     if (req.body.remember) {
@@ -120,7 +120,7 @@ app.post('/signin',
   }
 )
 
-app.get("/account", isLoggedIn, async (req,res)=> {
+app.get("/api/account", isLoggedIn, async (req,res)=> {
   try {
     const client = await pool.connect()
     await client.query('BEGIN')
@@ -139,7 +139,7 @@ app.get("/account", isLoggedIn, async (req,res)=> {
   }
 })
 
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
   console.log("logout time")
   req.logout()
   res.redirect("/")
@@ -150,7 +150,7 @@ app.get('/logout', (req, res) => {
 // })
 
 //signup route for posting 
-app.post('/signup', async (req, res ) => {
+app.post('/api/signup', async (req, res ) => {
   console.log("This is the request I got", req.body)
   try {
     //pull a client from the pool
@@ -187,11 +187,11 @@ app.post('/signup', async (req, res ) => {
   }
 })
 
-app.get('/newproject', isLoggedIn, async (req,res)=> {
+app.get('/api/newproject', isLoggedIn, async (req,res)=> {
   console.log("You got here now")
 })
 
-app.post('/newproject', isLoggedIn, async (req,res) => {
+app.post('/api/newproject', isLoggedIn, async (req,res) => {
   try {
     const client = await pool.connect()
     await client.query('BEGIN')
@@ -214,7 +214,7 @@ app.post('/newproject', isLoggedIn, async (req,res) => {
   }
 })
 
-app.get("/projects", isLoggedIn, async (req, res) => {
+app.get("/api/projects", isLoggedIn, async (req, res) => {
   try {
     const client = await pool.connect()
     await client.query('BEGIN')
