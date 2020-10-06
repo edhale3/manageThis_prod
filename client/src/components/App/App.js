@@ -18,7 +18,7 @@ function App (){
           {/* <Navigation /> */}
             <Switch>
               <Route path="/" component={Landing} exact/>
-              <Route path="/Home" component={Landing} exact/>
+              <Route path="/home" component={Landing} exact/>
               <Route path="/about" component={About}/>
               <Route path="/contact" component={Contact}/>
               <Route path="/signup" component={SignUp}/>

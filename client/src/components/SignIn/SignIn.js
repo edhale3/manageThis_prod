@@ -11,7 +11,7 @@ class SignIn extends Component {
     }
 
     componentDidMount = async () => {
-        let response = await axios.get("/login")
+        let response = await axios.get("/api/login")
             .then(res => {
                 console.log(res)
                 return res.data
@@ -28,7 +28,7 @@ class SignIn extends Component {
     }
 
     logout = () => {
-        axios.get("/logout")
+        axios.get("/api/logout")
         .then(res => {
             console.log(res)
             this.setState({isLoggedIn: false})

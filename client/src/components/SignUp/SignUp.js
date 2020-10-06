@@ -27,7 +27,7 @@ class SignUp extends Component {
         e.preventDefault()
         let newData = this.state
 
-        axios.post('/signup', newData)
+        axios.post('/api/signup', newData)
         .then(res => {
             console.log(res.data.errors)
             if(res.data){

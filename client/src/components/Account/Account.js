@@ -11,7 +11,7 @@ class Account extends Component {
     }
 
     componentDidMount = () => {
-        Axios.get("/account")
+        Axios.get("/api/account")
         .then(res => {
             console.log("account res ", res)
             if(res.data == false ){
@@ -41,7 +41,7 @@ class Account extends Component {
     }
 
     getAllProjects = async () => {
-        let response = await Axios.get("/projects")
+        let response = await Axios.get("/api/projects")
         .then(res => {
             return res.data
         })
