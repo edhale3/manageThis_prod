@@ -15,14 +15,11 @@ class Landing extends Component {
     
 
     onClick = (e) => {
-        console.log(e.target.name)
         this.setState({ redirect: e.target.name})
     }
 
 
     render () {
-
-        console.log("Got here muddafucka ", this.state)
         if(this.state.redirect){
             return <Redirect to={`/${this.state.redirect}`} />
         }

@@ -35,6 +35,12 @@ class Account extends Component {
         })
     }
 
+    getTitles = () => {
+         return this.state.data.map(item => {
+             return item.title
+         })
+    }
+
     // getData = () => {
     //     return Object.keys(this.state.data).map(item => {
     //         return (<div key={Math.floor(Math.random()*200)}>{this.state.data[item]}</div>)
@@ -56,11 +62,11 @@ class Account extends Component {
                 <div className="Account-Header">
                     <div className="Welcome-Header">                    
                         <button onClick={this.logoutButton} className="Logout-Header">Logout</button>
-                        Welcome to ManageThis, {this.state.data ? this.state.data.first_name : "User"}
+                        Welcome to ManageThis, {this.state.data ? this.state.data[0].first_name : "User"}
                     </div>
                 </div>
                 <button onClick={this.getNewProject} className="New-Project">New Project</button>
-                <Projects/>
+                <Projects titles={this.getTitles()}/>
             </div>
         )
     }

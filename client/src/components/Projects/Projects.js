@@ -8,24 +8,22 @@ class Projects extends Component {
         this.state = {}
     }
 
-    getProjects = (req,res) => {
-        Axios.get("/api/projects")
-        .then(res => {
-            if(res.data === false){
-                window.location.replace("/signin")
-            } 
-            console.log(res)
-        })
-        .catch(err => {
-            throw err
+    componentDidMount = () => {
+        this.setState(this.props)
+    }
+
+    createProjectHeaders = () => {
+        return this.state.titles.map(title => {
+            return <p className ="Project-Title">{title}</p>
         })
     }
+
 
     render(){
         return (
             <div className="List-Projects">
-                Open Projects
-                {this.getProjects()}    
+                <h4>Open Projects</h4>
+                {this.state.titles ? this.createProjectHeaders() : ''}
             </div>
         )
     }

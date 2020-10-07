@@ -33,7 +33,6 @@ exports.account = async (req,res) => {
       await JSON.stringify(await client.query(`select first_name, last_name, email, title, project_status, description from "accounts" left join "projects" on accounts.account_id = projects.account_id where accounts.account_id = $1`,
       [req.user[0].id],
       function(err, result){
-          console.log("this result: ", result)
         if(result.rows[0]){
           res.send(result.rows)
         } else {
@@ -51,7 +50,7 @@ exports.logout = (req, res) => {
 }
 
 exports.signup = (req,res) => {
-    console.log("this one: ", req.isAuthenticated())
+    console.log("isAuthenticated: ", req.isAuthenticated())
 }
 
 exports.postSignup = async (req, res ) => {

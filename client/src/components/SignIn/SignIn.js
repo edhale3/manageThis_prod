@@ -13,13 +13,11 @@ class SignIn extends Component {
     componentDidMount = async () => {
         let response = await axios.get("/api/signin")
             .then(res => {
-                console.log(res)
                 return res.data
             })
             .catch(err => {
                 throw err
             })
-            console.log(response)
         if(response){   
             this.setState({
                 isLoggedIn: true
@@ -30,7 +28,6 @@ class SignIn extends Component {
     logout = () => {
         axios.get("/api/logout")
         .then(res => {
-            console.log(res)
             this.setState({isLoggedIn: false})
         })
         .catch( err => {throw err})

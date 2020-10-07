@@ -1,9 +1,7 @@
 const { Pool } = require('pg');
-// your credentials
-DATABASE_URL = 'postgres://edwardhale:Draygon4$@127.0.0.1:5432/manage';
 
 const pool = new Pool({
-  connectionString: DATABASE_URL
+  connectionString: process.env.DATABASE_URL
 });
 
 // a generic query, that executes all queries you send to it
