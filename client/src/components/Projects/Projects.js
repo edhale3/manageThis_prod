@@ -14,16 +14,17 @@ class Projects extends Component {
 
     createProjectHeaders = () => {
         return this.state.titles.map(title => {
-            return <p className ="Project-Title">{title}</p>
+            return <li className ="Project-Title">{title}</li>
         })
     }
-
 
     render(){
         return (
             <div className="List-Projects">
                 <h4>Open Projects</h4>
-                {this.state.titles ? this.createProjectHeaders() : ''}
+                <ul>
+                    {this.state.titles ? this.createProjectHeaders() : ''}
+                </ul>
             </div>
         )
     }

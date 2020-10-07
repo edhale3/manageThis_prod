@@ -7,4 +7,35 @@
     margin-top: 10%;
     margin-left: 2%;
     border-radius: .3em;
+    overflow-y:scroll;
+}
+
+.List-Projects li {
+    list-style-type: none;
+    border: #92adcc;
+    border-style: solid;
+    border-bottom: 1px;
+    border-left: 0;
+    width: 100%;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.List-Projects li:hover {
+    background-color: coral;
+}
+
+.List-Projects ul {
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+    margin-top: 0;
+
+}
+
+.List-Projects h4 {
+    margin-left: 10px;
 }
