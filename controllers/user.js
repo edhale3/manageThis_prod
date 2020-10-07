@@ -35,7 +35,7 @@ exports.account = async (req,res) => {
       function(err, result){
           console.log("this result: ", result)
         if(result.rows[0]){
-          res.send(result.rows[0])
+          res.send(result.rows)
         } else {
           res.send("Redirect")
         }
