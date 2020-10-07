@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../SignUp/SignUp.scss'
 import AboutContact from '../Buttons/AboutContact';
+import Navigation from '../Buttons/Navigation'
 
 class SignUp extends Component {
     constructor(){
@@ -46,6 +47,7 @@ class SignUp extends Component {
     render() {
         return (
             <div className='Signup-Page'>
+                {/* <Navigation/> */}
                 <div className='Signin-Data'>
                 <form className='Signin-Form' onSubmit={this.onSubmit}>
                     <br /><label>First Name:</label><br />

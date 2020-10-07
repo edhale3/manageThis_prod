@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../SignIn/SignIn.scss'
 import SignInForm from '../Forms/SignInForm'
 import AboutContact from '../Buttons/AboutContact';
+import Navigation from '../Buttons/Navigation';
 
 class SignIn extends Component {
     constructor(){
@@ -46,8 +47,8 @@ class SignIn extends Component {
         }
         return (
             <div className="authenticatedLogic">
+                {/* <Navigation/> */}
                 {newData}
-                <p>This is here</p>
                 <AboutContact/>
             </div>
         )
