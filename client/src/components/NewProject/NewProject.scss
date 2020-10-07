@@ -1,0 +1,45 @@
+// .authenticatedLogic {
+//     line-height: 100%;
+//     display: flex;
+//     justify-content: space-around;
+// }
+
+.Project-Page{
+    // background-color: rgba(255, 0, 0, 0.219);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.Project-Div {
+    // background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}   
+
+.Project-Form {
+    background-color: rgb(177, 112, 112);
+    display: block;
+    // justify-content: center;
+    // align-items: center;
+    margin-top: 10%;
+    padding: 3%;
+    border-radius: .3em;
+    width: 70%;
+}
+
+// .Signup-Submit {
+//     // margin: 0;
+//     margin-left: 103px;
+//     margin-right: 103px;
+// }
+
+.Project-Form input {
+    width: 100%;
+}
+
+.Description {
+    height: 300px;
+}

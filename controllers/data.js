@@ -12,13 +12,11 @@ exports.projects = async (req,res) => {
     try {
         const client = await pool.connect()
         await client.query('BEGIN')
-        res.send( JSON.stringify(await client.query(`select * from projects`)) )
+        res.send( JSON.stringify(await client.query(`select * from projects where account_id = '${req.user[0].id}'`)) )
     } catch (e){
         throw e
     }
 }
-
-
 
 exports.postProject = async (req,res) => {
     try {

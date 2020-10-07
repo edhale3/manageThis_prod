@@ -6,7 +6,7 @@ function isLoggedIn (req,res,next){
         next();
     } else {
         console.log("you got here so that's cool")
-        res.redirect("/signin")
+        res.send(req.isAuthenticated())
     }
   }
 

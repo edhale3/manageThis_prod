@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import '../NewProject/NewProject.scss'
 
 class NewProject extends Component {
     constructor() {
@@ -8,9 +9,11 @@ class NewProject extends Component {
     }
 
     componentDidMount = () => {
-        axios.get("/newproject")
+        axios.get("/api/newproject")
         .then(res => {
-            console.log(res)
+            if(res.data === false){
+                window.location.replace('/signin')
+            } 
         })
         .catch(err=> {
             console.error(err)
@@ -18,7 +21,6 @@ class NewProject extends Component {
     }
 
     onChange = (e) => {
-        console.log(e.target)
         this.setState({
             [e.target.name]:e.target.value
         })
@@ -27,7 +29,7 @@ class NewProject extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         let newData = this.state
-        axios.post("/newproject", newData)
+        axios.post("/api/newproject", newData)
         .then(res => {
             console.log(res)
         })
@@ -38,9 +40,9 @@ class NewProject extends Component {
 
     render() {
         return ( 
-        <div className='project-page'>
-            <div className='project-div'>
-                <form className='project-form' onSubmit={this.onSubmit}>
+        <div className='Project-Page'>
+            <div className='Project-Div'>
+                <form className='Project-Form' onSubmit={this.onSubmit}>
                     <br /><label>Title of Project</label><br />
                     <input
                         type="text"
@@ -58,6 +60,7 @@ class NewProject extends Component {
                     <label>Description of Project</label><br />
                     <input
                         type="text"
+                        className="Description"
                         name="description"
                         value={this.state.description}
                         onChange={this.onChange}

@@ -24,7 +24,7 @@ router.get('/api/signin', user.signin)
 router.post('/api/signin', passport.authenticate('local'), user.postSignin)
 router.get('/api/logout', user.logout)
 router.get("/api/account", isLoggedIn, user.account)
-router.get('/api/newproject', isLoggedIn, async (req,res)=> {
+router.get('/api/newproject', isLoggedIn, (req,res)=> {
     console.log("You got here now")
 })  
 router.post('/api/newproject', isLoggedIn, data.postProject )

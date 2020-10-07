@@ -26,6 +26,7 @@ exports.postSignin = (req, res) => {
 }
 
 exports.account = async (req,res) => {
+    console.log("got here")
     try {
       const client = await pool.connect()
       await client.query('BEGIN')

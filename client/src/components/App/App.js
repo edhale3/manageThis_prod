@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 // import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+// import Footer from '../Footer/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import About from '../About/About'
 import Contact from '../Contact/Contact'
