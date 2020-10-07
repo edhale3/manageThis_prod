@@ -14,6 +14,7 @@ class Account extends Component {
     componentDidMount = () => {
         Axios.get("/api/account")
         .then(res => {
+            console.log(res)
             if(res.data === false ){
                 window.location.replace("/signin")
             }
