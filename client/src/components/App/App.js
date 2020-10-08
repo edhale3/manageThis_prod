@@ -28,6 +28,7 @@ function App (){
               <Route path="/newproject" component={NewProject} />      
             </Switch>
         </Router>
+       
     )
 }
 

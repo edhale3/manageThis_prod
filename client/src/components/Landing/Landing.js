@@ -28,10 +28,10 @@ class Landing extends Component {
             <div className="Landing">
                 <div className="NewData">
                     <h1>Welcome to ManageThis</h1>
-                    <div className="Buttons">
+                </div>
+                <div className="Buttons">
                         <button className="Signup" name="signup" onClick ={this.onClick}>Sign Up</button>
                         <button className="Signin" name="signin"  onClick={this.onClick}>Sign In</button>
-                    </div>
                 </div>
                 {/* <div className= "ExtraButtons">
                     <a href="/About" className="About">About</a>

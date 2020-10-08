@@ -1,10 +1,11 @@
 // html,body {
-//     background-color: rgb(44, 220, 226);
+//     // background-color: rgb(44, 220, 226);
+//     overflow: hidden;
 // }
 
 .Account-Container {
     // // background-color: rgba(88, 88, 199, 0.384);
-    // position: absolute;
+    position: relative;
     // background-color: rgba(0, 0, 0, 0.534);
     // line-height: 50px;
     // width: 100%;
@@ -12,7 +13,7 @@
     background-color: rgb(146, 173, 204);
     height: 150vh;
     line-height: 100%;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 .Account-Header {
@@ -20,6 +21,7 @@
     background-color: rgba(0, 0, 0, 0.534);
     line-height: 80%;
     width: 100%;
+    overflow: hidden;
 }
 
 .Welcome-Header {
@@ -27,11 +29,12 @@
     // background-color: rgba(222, 184, 135, 0.514);
     // display: inline-block;
     float: right;
-    margin-right: 5vw;
+    margin-right: 2vw;
+    overflow: hidden;
 }
 
 .Logout-Header {
-    margin-right: 2vh;
+    margin-right: 1vh;
 }
 
 .New-Project {
