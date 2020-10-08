@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import '../Account/Account.scss'
+import DisplayProject from '../DisplayProject/DisplayProject';
 import Projects from '../Projects/Projects'
 
 
@@ -62,11 +63,14 @@ class Account extends Component {
                 <div className="Account-Header">
                     <div className="Welcome-Header">                    
                         <button onClick={this.logoutButton} className="Logout-Header">Logout</button>
-                        Welcome to ManageThis, {this.state.data ? this.state.data[0].first_name : "User"}
+                        Welcome, {this.state.data ? this.state.data[0].first_name : "User"}
                     </div>
+                    <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 </div>
-                <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 <Projects titles={this.getTitles()}/>
+                {/* <Projects titles={this.getTitles()}/> */}
+                <DisplayProject/>
+
             </div>
         )
     }

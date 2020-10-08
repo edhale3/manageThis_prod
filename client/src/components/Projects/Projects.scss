@@ -1,11 +1,13 @@
 .List-Projects {
-    width: 230px;
-    height: 80%;
+    // min-width: 150px;
+    width: 25vw;
+    height: 85%;
     background-color: rgb(236, 231, 161);
     display: inline-block;
     float: left;
-    margin-top: 10%;
+    margin-top: 15vh;
     margin-left: 2%;
+    margin-bottom: 10%;
     border-radius: .3em;
     overflow-y:scroll;
 }

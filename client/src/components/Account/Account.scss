@@ -8,16 +8,17 @@
     // background-color: rgba(0, 0, 0, 0.534);
     // line-height: 50px;
     // width: 100%;
+    display: flex;
     background-color: rgb(146, 173, 204);
-    height: 100vh;
+    height: 150vh;
     line-height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .Account-Header {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.534);
-    line-height: 50px;
+    line-height: 80%;
     width: 100%;
 }
 
@@ -26,20 +27,13 @@
     // background-color: rgba(222, 184, 135, 0.514);
     // display: inline-block;
     float: right;
-    margin-right: 70px;
+    margin-right: 5vw;
 }
 
 .Logout-Header {
-    margin-right: 20px;
+    margin-right: 2vh;
 }
 
 .New-Project {
-    color: white;
-    position: absolute;
-    top:62px;
-    margin-left: 21px;
-}
-
-.New-Project:active {
-    color:#7fd1bf
+    margin-right: 0
 }
