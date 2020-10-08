@@ -31,7 +31,8 @@ class NewProject extends Component {
         let newData = this.state
         axios.post("/api/newproject", newData)
         .then(res => {
-            console.log(res)
+            window.location.replace('/account')
+
         })
         .catch(err => {
             console.error(err)
