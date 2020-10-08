@@ -47,7 +47,7 @@ class SignUp extends Component {
     render() {
         return (
             <div className='Signup-Page'>
-                {/* <Navigation/> */}
+                <Navigation/>
                 <div className='Signin-Data'>
                 <form className='Signin-Form' onSubmit={this.onSubmit}>
                     <br /><label>First Name:</label><br />

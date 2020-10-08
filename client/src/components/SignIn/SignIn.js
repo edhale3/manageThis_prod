@@ -46,8 +46,8 @@ class SignIn extends Component {
             newData = <SignInForm />
         }
         return (
-            <div className="authenticatedLogic">
-                {/* <Navigation/> */}
+            <div>
+                <Navigation/>
                 {newData}
                 <AboutContact/>
             </div>
