@@ -2,4 +2,17 @@
     position: absolute;
     bottom: 4%;
     right: 4%;
+    // text-decoration: none;
+}
+
+.Extra-Buttons a {
+    text-decoration: none;
+    color: white;
+    background-color:#117a8b;
+
+}
+
+.Extra-Buttons a:visited {
+    text-decoration: none;
+    color: white;
 }
