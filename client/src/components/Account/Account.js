@@ -38,19 +38,29 @@ class Account extends Component {
 
     getTitles = () => {
          return this.state.data.map(item => {
-             return item.title
+             return {title: item.title, key:item.project_id}
          })
     }
 
-    // getData = () => {
-    //     return Object.keys(this.state.data).map(item => {
-    //         return (<div key={Math.floor(Math.random()*200)}>{this.state.data[item]}</div>)
-    //     })
-    // }
+    getProjectId = (id) => {
+        this.setState((prevState) => ({
+            data: prevState.data,
+            currentId: id
+        }))
+    }
 
     getNewProject = () => {
         window.location.replace("/newproject")
     }
+
+    sendData = () => {
+        return  this.state.data.filter(item => {
+            if(item.project_id == this.state.currentId){
+                return item
+            }
+        })
+    }
+
 
     render(){
         if(!this.state.data){
@@ -58,6 +68,7 @@ class Account extends Component {
                 <div> Loading... </div>
             )
         }
+        console.log(this.state)
         return (
             <div className="Account-Container">
                 <div className="Account-Header">
@@ -67,9 +78,9 @@ class Account extends Component {
                     </div>
                     <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 </div>
-                <Projects titles={this.getTitles()}/>
+                <Projects data={this.getTitles()} projectId={this.getProjectId}/>
                 {/* <Projects titles={this.getTitles()}/> */}
-                <DisplayProject/>
+                <DisplayProject currentData={this.state.currentId ? this.sendData() : null}/>
 
             </div>
         )

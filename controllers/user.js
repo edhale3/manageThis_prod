@@ -30,7 +30,7 @@ exports.account = async (req,res) => {
     try {
       const client = await pool.connect()
       await client.query('BEGIN')
-      await JSON.stringify(await client.query(`select first_name, last_name, email, title, project_status, description from "accounts" left join "projects" on accounts.account_id = projects.account_id where accounts.account_id = $1`,
+      await JSON.stringify(await client.query(`select first_name, last_name, email, title, project_status, project_id, description from "accounts" left join "projects" on accounts.account_id = projects.account_id where accounts.account_id = $1`,
       [req.user[0].id],
       function(err, result){
         if(result.rows[0]){

@@ -5,27 +5,17 @@ import '../DisplayProject/DisplayProject.scss'
 class DisplayProject extends Component {
     constructor(){
         super()
-        this.state = {}
+        this.state = null
     }
 
-    // componentDidMount = () => {
-    //     this.setState(this.props)
-    // }
-
-    // createProjectHeaders = () => {
-    //     return this.state.titles.map(title => {
-    //         return <li className ="Project-Title">{title}</li>
-    //     })
-    // }
 
     render(){ 
+        console.log(this.props)
+
         return (
             <div className="Single-Project">
                 <h2>Single Project</h2>
-                <ul>
-                    {/* {this.state.titles ? this.createProjectHeaders() : ''} */}
-                    hell yeah
-                </ul>
+                {this.state ? "heck yeah" : "heck no"}
             </div>
         )
     }
