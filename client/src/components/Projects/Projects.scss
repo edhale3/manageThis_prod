@@ -26,7 +26,11 @@
 
 }
 
-.List-Projects li:hover {
+// .List-Projects li:hover {
+//     background-color: coral;
+// }
+
+.List-Projects li:active {
     background-color: coral;
 }
 

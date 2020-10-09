@@ -8,14 +8,17 @@ class DisplayProject extends Component {
         this.state = null
     }
 
+    componentDidMount = () => {
+        console.log("I just wanted to know if this works")
+    }
 
     render(){ 
         console.log(this.props)
-
         return (
             <div className="Single-Project">
-                <h2>Single Project</h2>
-                {this.state ? "heck yeah" : "heck no"}
+                <h2>{this.props.currentData.title}</h2>
+                <h3>Status: {this.props.currentData.project_status}</h3>
+                <p>Description: {this.props.currentData.description}</p>
             </div>
         )
     }

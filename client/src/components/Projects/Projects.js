@@ -10,6 +10,7 @@ class Projects extends Component {
         this.onClick = this.onClick.bind(this)
     }
 
+
     componentDidMount = () => {
         this.setState(this.props)
     }
@@ -19,7 +20,6 @@ class Projects extends Component {
     }
 
     createProjectHeaders = () => {
-        console.log("this state: ", this.state)
         return this.state.data.map(item => {
             return <li key={item.key} data-key={item.key} onClick={this.onClick} className ="Project-Title">
                 {item.title}

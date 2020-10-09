@@ -36,8 +36,10 @@
 //     margin-right: 103px;
 // }
 
-.Project-Form input {
+.Project-Form input,textarea {
     width: 100%;
+    outline: none;
+
 }
 
 .Description {

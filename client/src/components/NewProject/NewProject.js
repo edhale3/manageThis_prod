@@ -39,6 +39,14 @@ class NewProject extends Component {
         })
     }
 
+    textAreaCounter = () => {
+        if(this.state.description){
+            return this.state.description.length < 3001 ? 
+            3000 - this.state.description.length + "/3000" : "0/3000"
+        } return "3000/3000"
+
+    }
+
     render() {
         return ( 
         <div className='Project-Page'>
@@ -59,14 +67,15 @@ class NewProject extends Component {
                         onChange={this.onChange}
                     /><br />
                     <label>Description of Project</label><br />
-                    <input
-                        type="text"
+                    <textarea
+                        type="textarea"
                         className="Description"
                         name="description"
                         value={this.state.description}
                         onChange={this.onChange}
+                        onKeyUp={this.textAreaCounter}
                     /><br />
-
+                    <p>{this.textAreaCounter()}</p>
                     <br/>
                     <button onClick={this.handleSubmit}>Submit</button>
                     <br />

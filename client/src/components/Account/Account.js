@@ -54,11 +54,15 @@ class Account extends Component {
     }
 
     sendData = () => {
-        return  this.state.data.filter(item => {
+        let newData = this.state.data.find(item => {
             if(item.project_id == this.state.currentId){
                 return item
             }
+            // return item.project_id == this.state.currentId
         })
+        return (
+            <DisplayProject currentData={newData}/>
+        )
     }
 
 
@@ -68,7 +72,6 @@ class Account extends Component {
                 <div> Loading... </div>
             )
         }
-        console.log(this.state)
         return (
             <div className="Account-Container">
                 <div className="Account-Header">
@@ -79,8 +82,7 @@ class Account extends Component {
                     <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 </div>
                 <Projects data={this.getTitles()} projectId={this.getProjectId}/>
-                {/* <Projects titles={this.getTitles()}/> */}
-                <DisplayProject currentData={this.state.currentId ? this.sendData() : null}/>
+                 {this.state.currentId ? this.sendData() : null}
 
             </div>
         )
