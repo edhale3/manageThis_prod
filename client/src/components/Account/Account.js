@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import '../Account/Account.scss'
 import DisplayProject from '../DisplayProject/DisplayProject';
 import Projects from '../Projects/Projects'
-
+import CreateComment from '../Comments/CreateComment'
+import { find } from 'lodash';
 
 
 class Account extends Component {
@@ -15,7 +16,6 @@ class Account extends Component {
     componentDidMount = () => {
         Axios.get("/api/account")
         .then(res => {
-            console.log(res)
             if(res.data === false ){
                 window.location.replace("/signin")
             }
@@ -42,15 +42,21 @@ class Account extends Component {
          })
     }
 
-    getProjectId = (id) => {
-        this.setState((prevState) => ({
-            data: prevState.data,
-            currentId: id
-        }))
-    }
-
     getNewProject = () => {
         window.location.replace("/newproject")
+    }
+
+    getData = (id) => {
+        this.setState(prevState => ({
+            data: prevState.data,
+            currentId: null
+        }))
+        setTimeout(()=> {
+            this.setState(prevState => ({
+                data: prevState.data,
+                currentId: id
+            }))
+        }, 100)
     }
 
     sendData = () => {
@@ -58,13 +64,15 @@ class Account extends Component {
             if(item.project_id == this.state.currentId){
                 return item
             }
-            // return item.project_id == this.state.currentId
         })
         return (
-            <DisplayProject currentData={newData}/>
+            <div ref="displays">
+                <DisplayProject  ref="display-project" currentData={newData}/>
+                <CreateComment project_id={newData.project_id} data={this.getData}/>
+            </div>
+
         )
     }
-
 
     render(){
         if(!this.state.data){
@@ -81,9 +89,8 @@ class Account extends Component {
                     </div>
                     <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 </div>
-                <Projects data={this.getTitles()} projectId={this.getProjectId}/>
+                <Projects data={this.getTitles()} projectId={this.getData}/>
                  {this.state.currentId ? this.sendData() : null}
-
             </div>
         )
     }
