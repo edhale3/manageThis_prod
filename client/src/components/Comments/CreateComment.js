@@ -13,9 +13,8 @@ class CreateCommment extends Component {
         }
     }
 
+    //upon mounting setup state with added project id from parent component (Account)
     componentDidMount = () => {
-        console.log("this is the state: ", this.state)
-        console.log("this is the props: ", this.props)
         this.setState(prevState => {
             return {
                 comment_title: prevState.comment_title,
@@ -25,14 +24,14 @@ class CreateCommment extends Component {
         })
     }
 
+    //change state according to the supplied form values
     onChange = (e) => {
-        console.log(e.target.value)
         this.setState({
             [e.target.name]:e.target.value
         })
-        console.log(this.state)
     }
 
+    //submit form data that is stored in state. send to the api
     handleSubmit = (e) => {
         e.preventDefault()
         Axios.post("/api/createcomment", this.state)
@@ -46,6 +45,7 @@ class CreateCommment extends Component {
         this.props.data(this.state.project_id)
     }
 
+    //render
     render () {
         return (
             <div className="Add-Comment">

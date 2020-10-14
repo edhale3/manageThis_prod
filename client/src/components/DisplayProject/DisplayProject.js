@@ -8,21 +8,21 @@ class DisplayProject extends Component {
         this.state = null
     }
 
+    //upon mounting get comments for the matching project_id
     componentDidMount = () => {
         Axios.get(`/api/getcomments/${this.props.currentData.project_id}`)
         .then(res=> {
-            console.log(res.data.rows)
+            console.log("Comments: ", res.data)
             this.setState({
                 comments: res.data.rows
             })
         })
         .catch (err => {
-            console.error("Throw this error: ", err)
+            throw err
         })
-        // this.setState({})
-        console.log("this is what i want", this.state)
     }
 
+    //dynamically create paragraph elements of the comments (titles for now)
     displayComments = () => {
         return this.state.comments.map(comment => {
             return (
@@ -30,8 +30,8 @@ class DisplayProject extends Component {
             )
         })
     }
-
-
+    
+    //render comp
     render(){ 
         return (
             <div className="Full-Project">

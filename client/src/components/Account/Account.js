@@ -6,7 +6,6 @@ import Projects from '../Projects/Projects'
 import CreateComment from '../Comments/CreateComment'
 import { find } from 'lodash';
 
-
 class Account extends Component {
     constructor(){
         super()
@@ -26,6 +25,7 @@ class Account extends Component {
         })
     }
 
+    //call backend logout and end of session
     logoutButton = () => {
         Axios.get("/api/logout")
         .then(res => {
@@ -36,16 +36,21 @@ class Account extends Component {
         })
     }
 
+    //redirect to new project page
+    getNewProject = () => {
+        window.location.replace("/newproject")
+    }
+
+    //get titles function fo listing all the current projects (used/passed 
+    //to the Projects component)
     getTitles = () => {
          return this.state.data.map(item => {
              return {title: item.title, key:item.project_id}
          })
     }
 
-    getNewProject = () => {
-        window.location.replace("/newproject")
-    }
-
+    //used by the create comment component and projects component to refresh 
+    //the components by changing their states
     getData = (id) => {
         this.setState(prevState => ({
             data: prevState.data,
@@ -59,6 +64,8 @@ class Account extends Component {
         }, 100)
     }
 
+    //if there is a current project selected find the project in the state 
+    //and then return that data to the display project component
     sendData = () => {
         let newData = this.state.data.find(item => {
             if(item.project_id == this.state.currentId){
@@ -74,6 +81,7 @@ class Account extends Component {
         )
     }
 
+    //render func
     render(){
         if(!this.state.data){
             return (
