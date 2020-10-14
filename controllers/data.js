@@ -40,3 +40,36 @@ exports.postProject = async (req,res) => {
       throw e
     }
 }
+
+exports.postComment = async (req,res)=> {
+  try {
+    const client = await pool.connect()
+    await client.query('BEGIN')
+    await JSON.stringify(await client.query(`insert into comments ("comment_title", "comment_body", "project_id") 
+    values ($1,$2,$3)`,
+    [req.body.comment_title, req.body.comment_body, req.body.project_id],
+    function(err, result){
+      if(err){
+        console.log(err)
+        client.query('ROLLBACK')
+      } else {
+        client.query('COMMIT')
+        console.log("Comment created")
+        res.send("Congratulations you have made a new comment!")
+        return
+      }
+    }))
+  } catch (e){
+    throw e
+  }
+}
+
+exports.getComments = async (req,res)=> {
+    try {
+      const client = await pool.connect()
+      await client.query('BEGIN')
+      res.send( JSON.stringify(await client.query(`select * from comments where project_id = '${req.params.project_id}'`)) )
+    } catch (e){
+      throw e
+    }
+}
