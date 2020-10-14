@@ -8,6 +8,8 @@ class NewProject extends Component {
         this.state = {}
     }
 
+    //if component mounts make sure that the user is logged in with the middleware 
+    //function. if it doesn't fail then do nothing. otherwise send user to signin
     componentDidMount = () => {
         axios.get("/api/newproject")
         .then(res => {
@@ -20,12 +22,14 @@ class NewProject extends Component {
         })
     }
 
+    //on change set state to be the name/value pair provided by the form data
     onChange = (e) => {
         this.setState({
             [e.target.name]:e.target.value
         })
     }
 
+    //submit the state to the API when the submit button is triggered
     handleSubmit = (e) => {
         e.preventDefault()
         let newData = this.state
@@ -39,6 +43,7 @@ class NewProject extends Component {
         })
     }
 
+    //function to show how many characters the user has left in the description
     textAreaCounter = () => {
         if(this.state.description){
             return this.state.description.length < 3001 ? 
@@ -47,6 +52,7 @@ class NewProject extends Component {
 
     }
 
+    //render
     render() {
         return ( 
         <div className='Project-Page'>

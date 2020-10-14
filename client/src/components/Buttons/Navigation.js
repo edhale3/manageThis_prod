@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import './Navigation.scss'
 
+
+//navigation bar for application 
 class Navigation extends Component {
     constructor(){
         super()

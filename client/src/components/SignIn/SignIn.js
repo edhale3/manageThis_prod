@@ -11,6 +11,7 @@ class SignIn extends Component {
         this.state = {isLoggedIn: false}
     }
 
+    //check if signed in already. if so set the login state to true
     componentDidMount = async () => {
         let response = await axios.get("/api/signin")
             .then(res => {
@@ -26,6 +27,7 @@ class SignIn extends Component {
         } 
     }
 
+    //call logout function on the backend 
     logout = () => {
         axios.get("/api/logout")
         .then(res => {
@@ -34,6 +36,7 @@ class SignIn extends Component {
         .catch( err => {throw err})
     }
 
+    //render
     render() {
         const isLoggedIn = this.state.isLoggedIn
         let newData;

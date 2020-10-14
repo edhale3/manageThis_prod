@@ -17,13 +17,14 @@ class SignUp extends Component {
         }
     }
 
+    //on change set state to the values provided by the form data
     onChange = (e) => {
         this.setState({
             [e.target.name]:e.target.value
         })
     }
 
-
+    //when the signup submit button is pushed post the state data to the API
     handleSubmit = (e) => {
         e.preventDefault()
         let newData = this.state
@@ -44,6 +45,7 @@ class SignUp extends Component {
 
     }
 
+    //api
     render() {
         return (
             <div className='Signup-Page'>
