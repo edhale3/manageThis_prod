@@ -8,16 +8,21 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+//function for getting all projects that are assigned to the signed in user
 exports.projects = async (req,res) => {
+  console.log("got here")
     try {
         const client = await pool.connect()
         await client.query('BEGIN')
-        res.send( JSON.stringify(await client.query(`select * from projects where account_id = '${req.user[0].id}'`)) )
+        const data = await JSON.stringify(await client.query(`select * from projects where account_id = '${req.user[0].id}'`))
+        data ? client.release(true) : null
+        res.send(data)
     } catch (e){
         throw e
     }
 }
 
+//function for posting project as the signed in user
 exports.postProject = async (req,res) => {
     try {
       const client = await pool.connect()
@@ -32,6 +37,7 @@ exports.postProject = async (req,res) => {
         } else {
           client.query('COMMIT')
           console.log("Project created")
+          client.release(true)
           res.send("Congratulations you have made a new project!")
           return
         }
@@ -41,34 +47,42 @@ exports.postProject = async (req,res) => {
     }
 }
 
+//function for posting comment as the signed in user
 exports.postComment = async (req,res)=> {
   try {
     const client = await pool.connect()
     await client.query('BEGIN')
-    await JSON.stringify(await client.query(`insert into comments ("comment_title", "comment_body", "project_id") 
+    const data = await JSON.stringify(await client.query(`insert into comments ("comment_title", "comment_body", "project_id") 
     values ($1,$2,$3)`,
     [req.body.comment_title, req.body.comment_body, req.body.project_id],
     function(err, result){
       if(err){
         console.log(err)
         client.query('ROLLBACK')
+        // res.send("FAILURE")
       } else {
         client.query('COMMIT')
         console.log("Comment created")
-        res.send("Congratulations you have made a new comment!")
-        return
+        // res.send("Congratulations you have made a new comment!")
+        return "done"
       }
     }))
+    data ? client.release(true) : console.log("nothing to see yet")
   } catch (e){
+    console.log(e)
     throw e
   }
 }
 
+//function for getting all comments associated with the signed in user
 exports.getComments = async (req,res)=> {
+  console.log("got to this point")
     try {
       const client = await pool.connect()
       await client.query('BEGIN')
-      res.send( JSON.stringify(await client.query(`select * from comments where project_id = '${req.params.project_id}'`)) )
+      const data = await JSON.stringify(await client.query(`select * from comments where project_id = '${req.params.project_id}'`)) 
+      data ? client.release(true) : null
+      res.send(data)
     } catch (e){
       throw e
     }
