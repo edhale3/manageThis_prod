@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from 'axios'
 import '../DisplayProject/DisplayProject.scss'
 import NewProject from "../NewProject/NewProject";
+import { indexOf } from "lodash";
 
 class DisplayProject extends Component {
     constructor(){
@@ -70,13 +71,74 @@ class DisplayProject extends Component {
         this.setState({editToggle:!this.state.editToggle})
     }
 
+    deleteComment = (e) => {
+        let key = e.target.getAttribute("data-key")
+        // Axios.delete(`/api/deletecomment/${key}`)
+        // .then(res => {
+        //     console.log(res)
+        //     if(res.data == "Success"){
+        //         this.state.comments.find(comment => {
+        //             this.state.comments.indexOf(comment)
+        //             // indexOf()
+        //             // if(comment.comment_id == key){
+        //             //     this.state.comments
+        //             // }
+        //         })
+        //     } else {
+        //         console.log("got here. maybe didn't work.")
+        //     }
+
+        // })
+        // .catch(err => {
+        //     throw err
+        // })
+        console.log(this.state.comments.find(comment => {
+            if(comment.comment_id == key){
+                return this.state.comments.indexOf(comment)
+            }
+        }))
+    }
+
     //dynamically create paragraph elements of the comments (titles for now)
     displayComments = () => {
         return this.state.comments.map(comment => {
             return (
-                <p>-{comment.comment_body}</p>
+                <div data-key={comment.comment_id}>
+                    <p>-{comment.comment_body}
+                        <button onClick={this.deleteComment} data-key={comment.comment_id} style={{
+                            backgroundColor:'red', 
+                            color:'white', 
+                            height:'min-content', 
+                            width:'min-content'
+                        }}>Delete
+                        </button>
+                    </p>
+                </div>
             )
         })
+    }
+
+    deleteProject = (e) => {
+        e.preventDefault()
+        console.log(this.state.project_id)
+        let answer = prompt("Are you sure you want to do this? (y/n)")
+        if(answer == 'y'){
+            Axios.delete(`/api/deleteproject/${this.state.project_id}`)
+            .then(res => {
+                console.log(res)
+                if(res.data == "Success"){
+                    window.location.replace('/account')
+                } else {
+                    console.log("got here. maybe didn't work.")
+                }
+    
+            })
+            .catch(err => {
+                throw err
+            })
+        } else {
+            console.log("do nothing")
+        }
     }
 
     //render comp
@@ -112,6 +174,7 @@ class DisplayProject extends Component {
                         <br/>
                         <button onClick={this.handleSubmit}>Update</button>
                         <button onClick={this.toggleEdit}>Cancel</button>
+                        <button onClick={this.deleteProject} style={{backgroundColor: 'red', color:'white'}}>Delete</button>
                         <br />
                     </form>
                 </div>

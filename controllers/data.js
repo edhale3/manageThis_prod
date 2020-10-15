@@ -27,7 +27,7 @@ exports.postProject = async (req,res) => {
     try {
       const client = await pool.connect()
       await client.query('BEGIN')
-      await JSON.stringify(await client.query(`insert into projects ("title", "project_status", "description", "account_id") 
+      const data = await JSON.stringify(await client.query(`insert into projects ("title", "project_status", "description", "account_id") 
       values ($1,$2,$3,$4)`,
       [req.body.title, req.body.project_status, req.body.description, req.user[0].id],
       function(err, result){
@@ -37,11 +37,11 @@ exports.postProject = async (req,res) => {
         } else {
           client.query('COMMIT')
           console.log("Project created")
-          client.release(true)
-          res.send("Congratulations you have made a new project!")
           return
         }
       }))
+      data ? client.release(true) : console.log("nothing to see yet")
+      res.send("done")
     } catch (e){
       throw e
     }
@@ -89,17 +89,11 @@ exports.getComments = async (req,res)=> {
 }
 
 exports.updateProject = async (req, res) => {
-  console.log("congratulations you got here to the update function with params: ", req.params)
-  console.log("congratulations you got here to the update body: ", req.body)
   try {
     const client = await pool.connect()
     await client.query('BEGIN')
     const data = await JSON.stringify(
         await client.query(
-          // `update projects set title = '${req.body.title}', 
-          //   project_status = '${req.body.project_status}', 
-          //   description = '${req.body.description}' 
-          //   where project_id = '${req.body.project_id}'`,
             `update projects set title = ($1), 
             project_status = ($2), 
             description = ($3) 
@@ -126,4 +120,62 @@ exports.updateProject = async (req, res) => {
     throw e
   }
 
+}
+
+exports.deleteProject = async (req, res) => {
+  try {
+    const client = await pool.connect()
+    await client.query('BEGIN')
+    const data = await JSON.stringify(
+      await client.query(
+          `delete from projects where project_id = ($1)`,
+          [req.params.project_id],
+          function(err, res){
+            if(err){
+              console.log(err)
+              client.query('ROLLBACK')
+              // res.send("FAILURE")
+            } else {
+              client.query('COMMIT')
+              console.log("Project deleted")
+              // res.send("Congratulations you have made a new comment!")
+              return "done"
+            }
+          }
+      )
+  )
+  data ? client.release(true) : console.log("nothing to see yet")
+  res.send("Success")
+  } catch (e) {
+      throw e
+  }
+}
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const client = await pool.connect()
+    await client.query('BEGIN')
+    const data = await JSON.stringify(
+      await client.query(
+          `delete from comments where comment_id = ($1)`,
+          [req.params.comment_id],
+          function(err, res){
+            if(err){
+              console.log(err)
+              client.query('ROLLBACK')
+              // res.send("FAILURE")
+            } else {
+              client.query('COMMIT')
+              console.log("Comment deleted")
+              // res.send("Congratulations you have made a new comment!")
+              return "done"
+            }
+          }
+      )
+  )
+  data ? client.release(true) : console.log("nothing to see yet")
+  res.send("Success")
+  } catch (e) {
+      throw e
+  }
 }
