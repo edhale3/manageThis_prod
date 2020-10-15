@@ -52,6 +52,7 @@ class Account extends Component {
     //used by the create comment component and projects component to refresh 
     //the components by changing their states
     getData = (id) => {
+        console.log(id)
         this.setState(prevState => ({
             data: prevState.data,
             currentId: null
@@ -74,7 +75,7 @@ class Account extends Component {
         })
         return (
             <div ref="displays">
-                <DisplayProject  ref="display-project" currentData={newData}/>
+                <DisplayProject  data={this.getData} ref="display-project" currentData={newData}/>
                 <CreateComment project_id={newData.project_id} data={this.getData}/>
             </div>
 
@@ -97,7 +98,7 @@ class Account extends Component {
                     </div>
                     <button onClick={this.getNewProject} className="New-Project">New Project</button>
                 </div>
-                <Projects data={this.getTitles()} projectId={this.getData}/>
+                <Projects refresh={this.getData} data={this.getTitles()} projectId={this.getData}/>
                  {this.state.currentId ? this.sendData() : null}
             </div>
         )

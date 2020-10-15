@@ -29,11 +29,16 @@ class Projects extends Component {
         })
     }
 
+    refresh = () => {
+        window.location.replace('/account')
+    }
+
     //render
     render(){ 
         return (
             <div className="List-Projects">
                 <h4>Open Projects</h4>
+                <button onClick={this.refresh}>Refresh</button>
                 <ul>
                     {this.state.data ? this.createProjectHeaders() : ''}
                 </ul>
