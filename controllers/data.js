@@ -87,3 +87,43 @@ exports.getComments = async (req,res)=> {
       throw e
     }
 }
+
+exports.updateProject = async (req, res) => {
+  console.log("congratulations you got here to the update function with params: ", req.params)
+  console.log("congratulations you got here to the update body: ", req.body)
+  try {
+    const client = await pool.connect()
+    await client.query('BEGIN')
+    const data = await JSON.stringify(
+        await client.query(
+          // `update projects set title = '${req.body.title}', 
+          //   project_status = '${req.body.project_status}', 
+          //   description = '${req.body.description}' 
+          //   where project_id = '${req.body.project_id}'`,
+            `update projects set title = ($1), 
+            project_status = ($2), 
+            description = ($3) 
+            where project_id = ($4)`,
+            [req.body.title, req.body.project_status, req.body.description, req.body.project_id],
+            function(err, res){
+              if(err){
+                console.log(err)
+                client.query('ROLLBACK')
+                // res.send("FAILURE")
+              } else {
+                client.query('COMMIT')
+                console.log("Project updated")
+                // res.send("Congratulations you have made a new comment!")
+                return "done"
+              }
+            }
+        )
+    )
+    data ? client.release(true) : console.log("nothing to see yet")
+    res.send(true)
+  } catch (e){
+    console.log(e)
+    throw e
+  }
+
+}
