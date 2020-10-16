@@ -72,40 +72,31 @@ class DisplayProject extends Component {
     }
 
     deleteComment = (e) => {
-        let key = e.target.getAttribute("data-key")
-        // Axios.delete(`/api/deletecomment/${key}`)
-        // .then(res => {
-        //     console.log(res)
-        //     if(res.data == "Success"){
-        //         this.state.comments.find(comment => {
-        //             this.state.comments.indexOf(comment)
-        //             // indexOf()
-        //             // if(comment.comment_id == key){
-        //             //     this.state.comments
-        //             // }
-        //         })
-        //     } else {
-        //         console.log("got here. maybe didn't work.")
-        //     }
+        let commentIndex = e.target.getAttribute("data-index")
+        let commentKey = e.target.getAttribute("data-key")
+        const tempArr = [...this.state.comments]
+        tempArr.splice(commentIndex,1)
+        this.setState({
+            comments:tempArr
+        })
+        Axios.delete(`/api/deletecomment/${commentKey}`)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            throw err
+        })
 
-        // })
-        // .catch(err => {
-        //     throw err
-        // })
-        console.log(this.state.comments.find(comment => {
-            if(comment.comment_id == key){
-                return this.state.comments.indexOf(comment)
-            }
-        }))
     }
 
     //dynamically create paragraph elements of the comments (titles for now)
     displayComments = () => {
         return this.state.comments.map(comment => {
+            // console.log(this.state.comments.indexOf(comment))
             return (
-                <div data-key={comment.comment_id}>
+                <div data-key={this.state.comments.indexOf(comment)}>
                     <p>-{comment.comment_body}
-                        <button onClick={this.deleteComment} data-key={comment.comment_id} style={{
+                        <button onClick={this.deleteComment} data-key={comment.comment_id} data-index={this.state.comments.indexOf(comment)} style={{
                             backgroundColor:'red', 
                             color:'white', 
                             height:'min-content', 
