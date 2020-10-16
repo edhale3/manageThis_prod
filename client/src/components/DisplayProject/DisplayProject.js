@@ -71,6 +71,7 @@ class DisplayProject extends Component {
         this.setState({editToggle:!this.state.editToggle})
     }
 
+    //first remove the comment from the current state and then remove comment from the database
     deleteComment = (e) => {
         let commentIndex = e.target.getAttribute("data-index")
         let commentKey = e.target.getAttribute("data-key")
