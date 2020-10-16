@@ -24,5 +24,8 @@ router.get("/api/projects", isLoggedIn, data.projects)
 router.post("/api/createcomment", isLoggedIn, data.postComment)
 router.get("/api/getcomments/:project_id", isLoggedIn, data.getComments)
 router.patch("/api/updateproject/:project_id", isLoggedIn, data.updateProject)
+router.delete('/api/deleteproject/:project_id', isLoggedIn, data.deleteProject)
+router.delete('/api/deletecomment/:comment_id', isLoggedIn, data.deleteComment)
+
 
 module.exports = router;

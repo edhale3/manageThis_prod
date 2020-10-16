@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from 'axios'
 import '../DisplayProject/DisplayProject.scss'
 import NewProject from "../NewProject/NewProject";
+import { indexOf } from "lodash";
 
 class DisplayProject extends Component {
     constructor(){
@@ -70,13 +71,65 @@ class DisplayProject extends Component {
         this.setState({editToggle:!this.state.editToggle})
     }
 
+    deleteComment = (e) => {
+        let commentIndex = e.target.getAttribute("data-index")
+        let commentKey = e.target.getAttribute("data-key")
+        const tempArr = [...this.state.comments]
+        tempArr.splice(commentIndex,1)
+        this.setState({
+            comments:tempArr
+        })
+        Axios.delete(`/api/deletecomment/${commentKey}`)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            throw err
+        })
+
+    }
+
     //dynamically create paragraph elements of the comments (titles for now)
     displayComments = () => {
         return this.state.comments.map(comment => {
+            // console.log(this.state.comments.indexOf(comment))
             return (
-                <p>-{comment.comment_body}</p>
+                <div data-key={this.state.comments.indexOf(comment)}>
+                    <p>-{comment.comment_body}
+                        <button onClick={this.deleteComment} data-key={comment.comment_id} data-index={this.state.comments.indexOf(comment)} style={{
+                            backgroundColor:'red', 
+                            color:'white', 
+                            height:'min-content', 
+                            width:'min-content'
+                        }}>Delete
+                        </button>
+                    </p>
+                </div>
             )
         })
+    }
+
+    deleteProject = (e) => {
+        e.preventDefault()
+        console.log(this.state.project_id)
+        let answer = prompt("Are you sure you want to do this? (y/n)")
+        if(answer == 'y'){
+            Axios.delete(`/api/deleteproject/${this.state.project_id}`)
+            .then(res => {
+                console.log(res)
+                if(res.data == "Success"){
+                    window.location.replace('/account')
+                } else {
+                    console.log("got here. maybe didn't work.")
+                }
+    
+            })
+            .catch(err => {
+                throw err
+            })
+        } else {
+            console.log("do nothing")
+        }
     }
 
     //render comp
@@ -112,6 +165,7 @@ class DisplayProject extends Component {
                         <br/>
                         <button onClick={this.handleSubmit}>Update</button>
                         <button onClick={this.toggleEdit}>Cancel</button>
+                        <button onClick={this.deleteProject} style={{backgroundColor: 'red', color:'white'}}>Delete</button>
                         <br />
                     </form>
                 </div>
