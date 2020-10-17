@@ -36,6 +36,7 @@ class CreateCommment extends Component {
         e.preventDefault()
         Axios.post("/api/createcomment", this.state)
         .then(res => {
+            console.log(res)
             this.setState({ newComment: res.data})
         })
         .catch(err => {

@@ -23,7 +23,7 @@ class DisplayProject extends Component {
         Axios.get(`/api/getcomments/${this.props.currentData.project_id}`)
         .then(res=> {
             this.setState({
-                comments: res.data.rows,
+                comments: res.data,
                 editToggle: false,
                 title:this.props.currentData.title,
                 project_status:this.props.currentData.project_status,
@@ -71,6 +71,7 @@ class DisplayProject extends Component {
         this.setState({editToggle:!this.state.editToggle})
     }
 
+    //first remove the comment from the current state and then remove comment from the database
     deleteComment = (e) => {
         let commentIndex = e.target.getAttribute("data-index")
         let commentKey = e.target.getAttribute("data-key")
