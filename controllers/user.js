@@ -34,7 +34,7 @@ exports.postSignin = (req, res) => {
 
 exports.account = (deps) => {
   const db = deps.db
-  return async function (req, res){
+  return async (req, res) => {
      try {
         const records = await db('accounts')
           .where('accounts.account_id',`${req.user[0].id}`)
@@ -57,7 +57,7 @@ exports.signup = (req,res) => {
 //post signup data and create new account (checks if the account already exists)
 exports.postSignup = (deps) => {
   const db = deps.db
-  return async function (req, res){
+  return async (req, res) => {
     try {
       const records = await db('accounts').select('account_id').where('email',`${req.body.email}`)
       if(records[0]){
