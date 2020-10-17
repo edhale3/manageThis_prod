@@ -23,7 +23,7 @@ class DisplayProject extends Component {
         Axios.get(`/api/getcomments/${this.props.currentData.project_id}`)
         .then(res=> {
             this.setState({
-                comments: res.data.rows,
+                comments: res.data,
                 editToggle: false,
                 title:this.props.currentData.title,
                 project_status:this.props.currentData.project_status,
