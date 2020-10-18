@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('passport');
 const bcrypt = require('bcrypt')
 
-function failure(code, message){
+function failure(code, message, res){
   return res.status(code).json({error: message})
 }
 
@@ -14,7 +14,7 @@ exports.projects = (deps) => {
       return res.json(records)
     } catch (err) {
       console.log('An error occurred looking up the projects: ', err)
-      return failure(500, 'Internal Error')
+      return failure(500, 'Internal Error', res)
     }
   }
 }
@@ -29,7 +29,7 @@ exports.postProject = (deps) => {
       return res.send({message: "Congratulations your project was created"})
     } catch (err) {
       console.log("Your project was not posted")
-      return failure(500, "Your project was not posted")
+      return failure(500, "Your project was not posted", res)
     }
   }
 }
@@ -45,7 +45,7 @@ exports.postComment = (deps) => {
       return res.send("Comment created")
     } catch (err){
       console.log("this is the err: ", err)
-      return failure(500, 'Your comment could not be posted')
+      return failure(500, 'Your comment could not be posted', res)
     }
   }
 }
@@ -59,7 +59,7 @@ exports.getComments = (deps) => {
       res.send(data)
     } catch (err){
       console.log("This is the error for the get comments: ", err)
-      return failure(500, "Your comments could not be retrieved")
+      return failure(500, "Your comments could not be retrieved", res)
     }
   }
 }
@@ -77,7 +77,7 @@ exports.updateProject = (deps) => {
       return res.send("The project was updated")
     } catch (err){
       console.log("This is the updateProject error: ", err)
-      return failure(500, "You project could not be updated")
+      return failure(500, "You project could not be updated", res)
     }
   }
 }
@@ -91,7 +91,7 @@ exports.deleteProject = (deps) => {
       return res.send("Success")
     } catch (err){
       console.log("This is the delete project error: ", err)
-      return failure(500, "Your project was not deleted")
+      return failure(500, "Your project was not deleted", res)
     }
   }
 }
@@ -104,7 +104,7 @@ exports.deleteComment = (deps) => {
         return res.send("Success")
       } catch (err) {
         console.log("Your comment was not deleted")
-        return fauilure(500)
+        return fauilure(500, "Your comment was not deleted", res)
       }
     }
 }

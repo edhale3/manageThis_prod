@@ -1,6 +1,7 @@
 const express = require('express')
 const passport = require('passport');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const ResourceNotFoundError = require('../errors/ResourceNotFoundError');
 // const database = require('../services/db')
 // const { Pool, Client } = require('pg');
 // //create pool of clients with connection string to connect to the 'manage' database
@@ -8,7 +9,7 @@ const bcrypt = require('bcrypt')
 //   connectionString: process.env.DATABASE_URL
 // });
 
-function failure(code, message){
+function failure(code, message, res){
   return res.status(code).json({error: message})
 }
 //function calls logout function that will end the session
@@ -35,17 +36,14 @@ exports.postSignin = (req, res) => {
 exports.account = (deps) => {
   const db = deps.db
   return async function (req, res){
-     try {
-        const records = await db('accounts')
-          .where('accounts.account_id',`${req.user[0].id}`)
-          .leftJoin('projects', 'accounts.account_id','projects.account_id')
-          .select('first_name', 'last_name', 'email', 'title', 'project_status','project_id', 'description' )
-        if(!records){ return failure(404, 'User not found')}
-        return res.json(records)
-     } catch (err){
-       console.log('An error occurred looking up the user ', err)
-        return failure(505, 'Internal Error')
-     }
+    const records = await db('accounts')
+      .where('accounts.account_id', req.user[0].id)
+      .leftJoin('projects', 'accounts.account_id','projects.account_id')
+      .select('first_name', 'last_name', 'email', 'title', 'project_status','project_id', 'description' )
+    if(!records[0]){ 
+      throw new ResourceNotFoundError('account', req.user[0].id)
+    }
+      return res.json(records) 
   }
 }
 
@@ -71,7 +69,7 @@ exports.postSignup = (deps) => {
       }
     } catch (err) {
       console.log("Your signup process failed", err)
-      return failure('Your signup process failed')
+      return failure(500, 'Your signup process failed', res)
     }
   }
 }
