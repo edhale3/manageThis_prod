@@ -6,14 +6,16 @@ const bcrypt = require('bcrypt')
 const isLoggedIn = require('../isLoggedIn');
 const db = require('knex')({
     client:'pg',
-    connection: {
-        host:process.env.DB_HOST,
-        user:process.env.DB_USER,
-        password:process.env.DB_PW,
-        database: process.env.DB
-    },
+    connection: process.env.DATABASE_URL,
     pool: { min: 0, max:15 }
 })
+
+// {
+//     host:process.env.DB_HOST,
+//     user:process.env.DB_USER,
+//     password:process.env.DB_PW,
+//     database: process.env.DB
+// }
 
 const deps = { db }
 
