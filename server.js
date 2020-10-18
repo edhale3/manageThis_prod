@@ -12,9 +12,12 @@ let createError = require('http-errors');
 
 const indexRouter = require('./routes/index');
 
+
+
 //parser for JSON data
 let cookieParser = require('cookie-parser')
 let bodyParser = require('body-parser');
+const ResourceNotFoundError = require('./errors/ResourceNotFoundError');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -42,6 +45,31 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
+
+
+const StatusCodeMapping = {
+  'invalid': 400,
+  'not_found': 404,
+  // etc.
+  'internal': 500,
+}
+function mapErrorToStatusCode(error) {
+  const code = (error && error.code) ? error.code : 'internal'
+  console.log("code:", code)
+  return StatusCodeMapping[code] || 500
+}
+
+//custom error mappgin 
+app.use(function errorHandler (error, req, res, next) {
+  console.log("Got here")
+  if (res.headersSent) {
+    return next(error)
+  }
+  res
+    .status(mapErrorToStatusCode(error))
+    .json({ error: error.message })
+})
+
 
 app.listen(PORT, () => {
   console.log(`Node server running at: http://localhost:${PORT}/`);
