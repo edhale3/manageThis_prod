@@ -22,13 +22,21 @@ const deps = { db }
 let user = require('../controllers/user')
 let data = require('../controllers/data')
 
+doAsync = (handler) => {
+    return (req, res, next) => {
+       handler(req, res)
+         .then(() => next())
+         .catch(next)
+    }
+ }
+
 router.get('/api', user.signin)//
 router.get("/api/signup", user.signup) //
 router.post('/api/signup', user.postSignup(deps))//
 router.get('/api/signin', user.signin)//
 router.post('/api/signin', passport.authenticate('local'), user.postSignin)//
 router.get('/api/logout', user.logout)//
-router.get("/api/account", isLoggedIn , user.account(deps))//
+router.get("/api/account", isLoggedIn , doAsync(user.account(deps)))//
 router.get('/api/newproject', isLoggedIn, (req,res)=> {
     console.log("You got here now")
 })  
