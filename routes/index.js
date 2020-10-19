@@ -39,7 +39,6 @@ router.get('/api/logout', user.logout)//
 router.get("/api/account", isLoggedIn , doAsync(user.account(deps)))//
 router.get('/api/newproject', isLoggedIn)  
 router.post('/api/newproject', isLoggedIn, doAsync(data.postProject(deps)))//
-// router.get("/api/projects", isLoggedIn, data.projects(deps))//
 router.post("/api/createcomment", isLoggedIn, doAsync(data.postComment(deps)))//
 router.get("/api/getcomments/:project_id", isLoggedIn, doAsync(data.getComments(deps)))//
 router.patch("/api/updateproject/:project_id", isLoggedIn, doAsync(data.updateProject(deps)))

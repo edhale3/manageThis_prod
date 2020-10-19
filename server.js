@@ -54,14 +54,13 @@ const StatusCodeMapping = {
   'internal': 500,
 }
 function mapErrorToStatusCode(error) {
+  console.log(error)
   const code = (error && error.code) ? error.code : 'internal'
-  console.log("code:", code)
   return StatusCodeMapping[code] || 500
 }
 
 //custom error mappgin 
 app.use(function errorHandler (error, req, res, next) {
-  console.log("Got here")
   if (res.headersSent) {
     return next(error)
   }
