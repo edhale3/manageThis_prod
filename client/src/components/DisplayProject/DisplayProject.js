@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Axios from 'axios'
 import '../DisplayProject/DisplayProject.scss'
-import NewProject from "../NewProject/NewProject";
-import { indexOf } from "lodash";
 
 class DisplayProject extends Component {
     constructor(){
@@ -114,11 +112,11 @@ class DisplayProject extends Component {
         e.preventDefault()
         console.log(this.state.project_id)
         let answer = prompt("Are you sure you want to do this? (y/n)")
-        if(answer == 'y'){
+        if(answer === 'y'){
             Axios.delete(`/api/deleteproject/${this.state.project_id}`)
             .then(res => {
                 console.log(res)
-                if(res.data == "Success"){
+                if(res.data === "Success"){
                     window.location.replace('/account')
                 } else {
                     console.log("got here. maybe didn't work.")
@@ -173,7 +171,6 @@ class DisplayProject extends Component {
                 // <NewProject/>
             )
         }
-        console.log("render this")
         return (
             
             <div className="Full-Project">

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Axios from 'axios'
 import '../Projects/Projects.scss'
 
 class Projects extends Component {

@@ -4,7 +4,6 @@ import '../Account/Account.scss'
 import DisplayProject from '../DisplayProject/DisplayProject';
 import Projects from '../Projects/Projects'
 import CreateComment from '../Comments/CreateComment'
-import { find } from 'lodash';
 
 class Account extends Component {
     constructor(){
@@ -52,7 +51,6 @@ class Account extends Component {
     //used by the create comment component and projects component to refresh 
     //the components by changing their states
     getData = (id) => {
-        console.log(id)
         this.setState(prevState => ({
             data: prevState.data,
             currentId: null
@@ -69,7 +67,7 @@ class Account extends Component {
     //and then return that data to the display project component
     sendData = () => {
         let newData = this.state.data.find(item => {
-            if(item.project_id == this.state.currentId){
+            if(item.project_id === this.state.currentId){
                 return item
             }
         })
